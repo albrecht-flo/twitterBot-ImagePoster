@@ -23,13 +23,17 @@ def send_telegram_bot_message(msg: str, to_admin: bool = False):
         logging.info(response)
 
 
+def swap_image_folders():
+    logging.info("Ran out of images, switching folders.")
+    os.rename(config.CONFIG['images_backlog_folder'], f"{config.CONFIG['images_backlog_folder']}bkp")
+    os.rename(config.CONFIG['images_base_folder'], config.CONFIG['images_backlog_folder'])
+    os.rename(f"{config.CONFIG['images_backlog_folder']}bkp", config.CONFIG['images_base_folder'])
+
+
 def get_random_image_from_folder():
     images = os.listdir(config.CONFIG["images_base_folder"])
     if len(images) == 0:
-        logging.info("Ran out of images, switching folders.")
-        os.rename(config.CONFIG['images_backlog_folder'], f"{config.CONFIG['images_backlog_folder']}bkp")
-        os.rename(config.CONFIG['images_base_folder'], config.CONFIG['images_backlog_folder'])
-        os.rename(f"{config.CONFIG['images_backlog_folder']}bkp", config.CONFIG['images_base_folder'])
+        swap_image_folders()
         images = os.listdir(config.CONFIG['images_base_folder'])
 
     image_path = images[random.randint(0, len(images) - 1)]
