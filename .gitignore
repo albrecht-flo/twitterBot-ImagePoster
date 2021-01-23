@@ -1,0 +1,7 @@
+images/
+images_posted/
+
+config.py
+*.log
+
+.idea/
