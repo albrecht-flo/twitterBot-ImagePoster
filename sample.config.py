@@ -1,7 +1,6 @@
 CONFIG = {
     'api_key': 'to be filled out',
     'api_key_secret': 'to be filled out',
-    'bearer_token': 'to be filled out',
 
     'access_token': 'to be filled out',
     'access_token_secret': 'to be filled out',
